@@ -1,9 +1,10 @@
- Momo Transaction Analytics 
+# momo-sms-analytics
+Momo Transaction Analytics 
 
 Team eight
 
 Team Members
-1.James Giir Deng 
+1. James Giir Deng 
 2.Byusa M Martin De Poles
 
 
@@ -31,7 +32,4 @@ https://github.com/jamesdeng462/momo-sms-analytics/projects
 The project follows a modular, enterprise-style architecture separating
 ETL, data storage, API services, and frontend components.
 
-Owners:
-1.James Giir Deng
-2.Byusa M Martin De Poles
 
