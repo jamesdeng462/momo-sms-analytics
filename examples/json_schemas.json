@@ -11,7 +11,7 @@
     "transaction_id": 101,
     "transaction_ref": "TX20260127001",
     "sender": {"user_id": 1, "full_name": "Samuel Carter"},
-    "receiver": {"user_id": 2, "full_name": "Linda Green"},
+    "receiver": {"user_id": 2, "full_name": "Linda Deslem"},
     "category": {"category_id": 1, "category_name": "Send Money"},
     "amount": 50000.00,
     "fee": 500.00,
