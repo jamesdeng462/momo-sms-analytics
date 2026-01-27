@@ -91,7 +91,7 @@ INSERT INTO users (phone_number, full_name, user_type, account_balance, status)
 VALUES 
 ('250790777777', 'Jane Smith', 'customer', 46449, 'active'),
 ('250789888888', 'Alex Doe', 'customer', 107487, 'active'),
-('250790777777', 'Linda Green', 'customer', 111487, 'active'),
+('250790777777', 'Linda Deslem', 'customer', 111487, 'active'),
 ('250788999999', 'Samuel Carter', 'customer', 67993, 'active'),
 ('250789888888', 'Robert Brown', 'customer', 123087, 'active');
 
@@ -111,7 +111,7 @@ INSERT INTO transactions (transaction_ref, sender_id, receiver_id, category_id, 
 VALUES
 ('TX20250102A', 1, 0, 1, 3600, 100, '2025-01-02 23:15:06', 'completed', 'Transfer to Jane Smith', '*165*S*3600 RWF transferred to Jane Smith ...', 'M-Money'),
 ('TX20250103A', 2, 0, 2, 15500, 250, '2025-01-03 20:40:38', 'completed', 'Transfer to Jane Smith', '*165*S*15500 RWF transferred to Jane Smith ...', 'M-Money'),
-('TX20250103B', 3, 0, 3, 5400, 0, '2025-01-03 22:04:05', 'completed', 'Payment to Linda Green', 'TxId: 47955567230. Your payment of 5,400 RWF to Linda Green ...', 'M-Money'),
+('TX20250103B', 3, 0, 3, 5400, 0, '2025-01-03 22:04:05', 'completed', 'Payment to Linda Deslem', 'TxId: 47955567230. Your payment of 5,400 RWF to Linda Deslem ...', 'M-Money'),
 ('TX20250104A', 4, 0, 2, 1000, 20, '2025-01-04 21:31:50', 'completed', 'Transfer to Alex Doe', '*165*S*1000 RWF transferred to Alex Doe ...', 'M-Money'),
 ('TX20250105A', 5, 0, 2, 40000, 250, '2025-01-06 21:20:35', 'completed', 'Transfer to Robert Brown', '*165*S*40000 RWF transferred to Robert Brown ...', 'M-Money');
 
