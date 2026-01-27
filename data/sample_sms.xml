@@ -3,10 +3,3 @@
 <sms protocol="0" address="M-Money" date="1736878131643" type="1" subject="null" body="TxId: 30801532894. Your payment of 1,000 RWF to Deslem 61758 has been completed at 2025-01-14 20:08:44. Your new balance: 87,000 RWF. Fee was 0 RWF." toa="null" sc_toa="null" service_center="+250788110383" read="1" status="-1" locked="0" date_sent="1736878124000" sub_id="6" readable_date="14 Jan 2025 8:08:51 PM" contact_name="(Unknown)" />
 </sms>
 
-
-extract XML
-save it as a JSON File
-store it in database 
-run a program that will extract the data from the JSON file and store it in a database.
-you connect the database using Python's sqlite3 library
-you run the server locally and test the endpoints using postman. 
