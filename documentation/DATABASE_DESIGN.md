@@ -1,6 +1,6 @@
 # Database Design & Justification
 
-## Design Rationale (250 words)
+## Design Rationale (288 words)
 
 The MoMo SMS data processing system is characterized by a highly developed database, which has the capability to process the mobile money transaction records efficiently without compromising the data integrity, data scaling and the most efficient query operation. The key entities of this architecture are the following: Users, Transactions, Transaction Categories, Transaction Participants, and System Logs. 
 
