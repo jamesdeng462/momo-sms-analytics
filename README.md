@@ -9,18 +9,7 @@ Team Members
 
 
 
- Project Description
-This project processes Momo SMS transaction data provided in XML format.
-The system extracts, cleans, categorizes, and stores transaction data in a
-relational SQLite database, then exposes analytics through a frontend dashboard
-for visualization and analysis.
 
-Tech Stack
-- Python (ETL Pipeline)
-- SQLite (Relational Database)
-- HTML, CSS, JavaScript (Frontend Dashboard)
-- GitHub (Version Control)
-- Agile Scrum (Project Management)
 
 Prokect resources
 https://miro.com/app/board/uXjVGODnhYI=/
