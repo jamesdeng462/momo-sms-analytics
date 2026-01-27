@@ -77,3 +77,67 @@ CREATE TABLE system_logs (
     FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+
+
+
+
+USE momo_sms_db;
+
+-- ======================
+-- Sample USERS
+-- ======================
+INSERT INTO users (phone_number, full_name, user_type, account_balance, status)
+VALUES 
+('250790777777', 'Jane Smith', 'customer', 46449, 'active'),
+('250789888888', 'Alex Doe', 'customer', 107487, 'active'),
+('250790777777', 'Linda Green', 'customer', 111487, 'active'),
+('250788999999', 'Samuel Carter', 'customer', 67993, 'active'),
+('250789888888', 'Robert Brown', 'customer', 123087, 'active');
+
+-- ======================
+-- Sample TRANSACTION CATEGORIES
+-- ======================
+INSERT INTO transaction_categories (category_name, category_code, description, transaction_fee_percentage, min_amount, max_amount, status)
+VALUES
+('Deposit', 'DEP', 'Cash deposits to account', 0, 100, 1000000, 'active'),
+('Transfer', 'TRF', 'Money transferred to another user', 2, 100, 500000, 'active'),
+('Payment', 'PAY', 'Payments for services or goods', 1, 100, 100000, 'active');
+
+-- ======================
+-- Sample TRANSACTIONS
+-- ======================
+INSERT INTO transactions (transaction_ref, sender_id, receiver_id, category_id, amount, fee, transaction_date, status, description, sms_content, source_system)
+VALUES
+('TX20250102A', 1, 0, 1, 3600, 100, '2025-01-02 23:15:06', 'completed', 'Transfer to Jane Smith', '*165*S*3600 RWF transferred to Jane Smith ...', 'M-Money'),
+('TX20250103A', 2, 0, 2, 15500, 250, '2025-01-03 20:40:38', 'completed', 'Transfer to Jane Smith', '*165*S*15500 RWF transferred to Jane Smith ...', 'M-Money'),
+('TX20250103B', 3, 0, 3, 5400, 0, '2025-01-03 22:04:05', 'completed', 'Payment to Linda Green', 'TxId: 47955567230. Your payment of 5,400 RWF to Linda Green ...', 'M-Money'),
+('TX20250104A', 4, 0, 2, 1000, 20, '2025-01-04 21:31:50', 'completed', 'Transfer to Alex Doe', '*165*S*1000 RWF transferred to Alex Doe ...', 'M-Money'),
+('TX20250105A', 5, 0, 2, 40000, 250, '2025-01-06 21:20:35', 'completed', 'Transfer to Robert Brown', '*165*S*40000 RWF transferred to Robert Brown ...', 'M-Money');
+
+-- ======================
+-- Sample TRANSACTION PARTICIPANTS
+-- ======================
+INSERT INTO transaction_participants (transaction_id, user_id, role, amount_impact)
+VALUES
+(1, 1, 'sender', -3600),
+(1, 2, 'receiver', 3600),
+(2, 1, 'sender', -15500),
+(2, 2, 'receiver', 15500),
+(3, 3, 'sender', -5400),
+(3, 4, 'receiver', 5400),
+(4, 4, 'sender', -1000),
+(4, 3, 'receiver', 1000),
+(5, 5, 'sender', -40000),
+(5, 5, 'receiver', 40000); -- Example if self-transfer
+
+-- ======================
+-- Sample SYSTEM LOGS
+-- ======================
+INSERT INTO system_logs (transaction_id, user_id, log_level, log_type, log_message, processing_stage, ip_address)
+VALUES
+(1, 1, 'INFO', 'TransactionCreated', 'Transaction created successfully', 'validation', '192.168.0.1'),
+(2, 1, 'INFO', 'TransactionProcessed', 'Transaction processed successfully', 'completed', '192.168.0.1'),
+(3, 3, 'INFO', 'TransactionProcessed', 'Transaction processed successfully', 'completed', '192.168.0.2'),
+(4, 4, 'INFO', 'TransactionProcessed', 'Transaction processed successfully', 'completed', '192.168.0.3'),
+(5, 5, 'INFO', 'TransactionProcessed', 'Transaction processed successfully', 'completed', '192.168.0.4');
