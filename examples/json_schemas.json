@@ -1,0 +1,25 @@
+{
+  "users": {
+    "user_id": 1,
+    "phone_number": "+250788999999",
+    "full_name": "Samuel Carter",
+    "user_type": "Customer",
+    "account_balance": 150000.00,
+    "status": "Active"
+  },
+  "transactions": {
+    "transaction_id": 101,
+    "transaction_ref": "TX20260127001",
+    "sender": {"user_id": 1, "full_name": "Samuel Carter"},
+    "receiver": {"user_id": 2, "full_name": "Linda Green"},
+    "category": {"category_id": 1, "category_name": "Send Money"},
+    "amount": 50000.00,
+    "fee": 500.00,
+    "total_amount": 50500.00,
+    "currency": "RWF",
+    "transaction_date": "2026-01-27T14:00:00",
+    "status": "COMPLETED",
+    "sms_content": "You sent 50,000 RWF to 0788110383. Fee 500 RWF.",
+    "source_system": "MTN Mobile Money"
+  }
+}
