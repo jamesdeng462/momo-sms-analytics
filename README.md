@@ -43,10 +43,11 @@ GitHub project tracker:  https://github.com/jamesdeng462/momo-sms-analytics/proj
 
 
 
- Repository Structure
+# Repository Structure
 The project follows a modular, enterprise-style architecture separating
 ETL, data storage, API services, and frontend components.
-Owners:
+
+# Owners:
 -James Giir Deng
 -Byusa M Martin De Poles
 
