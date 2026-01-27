@@ -1,0 +1,24 @@
+{
+  "transaction_id": 21,
+  "external_id": "43668074924",
+  "amount": 25000.0,
+  "currency": "RWF",
+  "date": "14 May 2024 8:58:35 PM",
+  "sender": {
+    "name": "Samuel Carter",
+    "phone_number": "0795594013"
+  },
+  "receiver": {
+    "name": "M-Money User",
+    "account_id": "36521838"
+  },
+  "category": {
+    "id": 1,
+    "name": "Received Money",
+    "description": "Incoming mobile money transfer"
+  },
+  "financial_details": {
+    "fee": 0.0,
+    "new_balance": 29060.0
+  }
+}
