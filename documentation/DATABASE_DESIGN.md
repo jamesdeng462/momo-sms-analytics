@@ -68,3 +68,41 @@ The ERD comprises 6 core entities with well-defined relationships:
                       │ user_id (FK)     │
                       │ created_at       │
                       └──────────────────┘
+
+
+
+
+### 3.2 Relationships
+
+#### 3.2.1 One-to-Many Relationships
+1. **Users → SMS_Records** (Sender)
+   - One user can send multiple transactions
+   - One SMS record has exactly one sender (optional)
+
+2. **Users → SMS_Records** (Receiver)
+   - One user can receive multiple transactions
+   - One SMS record has exactly one receiver (optional)
+
+3. **Users → System_Logs**
+   - One user can have multiple log entries
+   - One log entry belongs to one user (optional)
+
+#### 3.2.2 Many-to-Many Relationship
+1. **SMS_Records ↔ Transaction_Categories**
+   - One SMS record can belong to multiple categories
+   - One category can contain multiple SMS records
+   - **Resolution**: Junction table `sms_category_association`
+
+## 4. Table Specifications
+
+### 4.1 Users Table
+```sql
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    phone_number VARCHAR(20) UNIQUE NOT NULL,
+    full_name VARCHAR(100),
+    account_number VARCHAR(50) UNIQUE,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
