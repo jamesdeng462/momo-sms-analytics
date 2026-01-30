@@ -1,25 +1,319 @@
 {
-  "users": {
-    "user_id": 1,
-    "phone_number": "+250788999999",
-    "full_name": "Samuel Carter",
-    "user_type": "Customer",
-    "account_balance": 150000.00,
-    "status": "Active"
+  "json_schemas": {
+    "transaction": {
+      "description": "Complete transaction record with all related data",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "description": "Unique transaction identifier"},
+          "transaction_id": {"type": "string", "description": "Financial transaction ID from SMS"},
+          "amount": {"type": "number", "description": "Transaction amount in RWF"},
+          "currency": {"type": "string", "enum": ["RWF"], "default": "RWF"},
+          "transaction_type": {
+            "type": "string",
+            "enum": ["received", "sent", "withdrawal", "deposit", "payment", "airtime", "bill_payment", "cash_power"],
+            "description": "Type of transaction"
+          },
+          "sender": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "description": "Sender's name"},
+              "phone": {"type": "string", "description": "Sender's phone number (may be masked)"},
+              "account": {"type": "string", "description": "Sender's account number"}
+            }
+          },
+          "receiver": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "description": "Receiver's name"},
+              "phone": {"type": "string", "description": "Receiver's phone number"},
+              "account": {"type": "string", "description": "Receiver's account number"}
+            }
+          },
+          "date": {"type": "string", "format": "date-time", "description": "Transaction timestamp"},
+          "balance_after": {"type": "number", "description": "Balance after transaction"},
+          "fee": {"type": "number", "description": "Transaction fee"},
+          "status": {"type": "string", "enum": ["completed", "pending", "failed"], "default": "completed"},
+          "sms_body": {"type": "string", "description": "Original SMS text"},
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["TRANSFER", "DEPOSIT", "WITHDRAW", "PAYMENT", "AIRTIME", "BILL", "POWER", "SALARY", "REFUND", "COMM"]
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "parsed_at": {"type": "string", "format": "date-time"},
+              "parsed_by": {"type": "string"},
+              "source_file": {"type": "string"}
+            }
+          }
+        },
+        "required": ["id", "transaction_id", "amount", "transaction_type", "date"]
+      },
+      "example": {
+        "id": 1,
+        "transaction_id": "43668074924",
+        "amount": 25000,
+        "currency": "RWF",
+        "transaction_type": "received",
+        "sender": {
+          "name": "Samuel Carter",
+          "phone": "*********013",
+          "account": "unknown"
+        },
+        "receiver": {
+          "name": "Account Owner",
+          "phone": "36521838",
+          "account": "36521838"
+        },
+        "date": "2024-05-14T20:57:36",
+        "balance_after": 29060,
+        "fee": 0,
+        "status": "completed",
+        "sms_body": "You have received 25000 RWF from Samuel Carter (*********013) on your mobile money account at 2024-05-14 20:57:36. Message from sender: . Your new balance:29060 RWF. Financial Transaction Id: 43668074924.",
+        "categories": ["TRANSFER", "RECEIVED"],
+        "metadata": {
+          "parsed_at": "2024-01-20T10:30:00",
+          "parsed_by": "parse_xml.py",
+          "source_file": "sms_data.xml"
+        }
+      }
+    },
+    "dashboard_stats": {
+      "description": "Dashboard statistics response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "total_transactions": {"type": "integer"},
+          "total_amount": {"type": "number"},
+          "average_transaction": {"type": "number"},
+          "transaction_counts": {
+            "type": "object",
+            "additionalProperties": {"type": "integer"}
+          },
+          "daily_volume": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {"type": "string", "format": "date"},
+                "count": {"type": "integer"},
+                "total": {"type": "number"}
+              }
+            }
+          },
+          "top_senders": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "transaction_count": {"type": "integer"},
+                "total_sent": {"type": "number"}
+              }
+            }
+          },
+          "top_receivers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "transaction_count": {"type": "integer"},
+                "total_received": {"type": "number"}
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_transactions": 1693,
+        "total_amount": 1250000,
+        "average_transaction": 738.42,
+        "transaction_counts": {
+          "received": 845,
+          "sent": 423,
+          "withdrawal": 125,
+          "deposit": 200,
+          "payment": 100
+        },
+        "daily_volume": [
+          {"date": "2024-05-14", "count": 3, "total": 50000},
+          {"date": "2024-05-15", "count": 8, "total": 35000},
+          {"date": "2024-05-16", "count": 2, "total": 4150}
+        ],
+        "top_senders": [
+          {"name": "Jane Smith", "transaction_count": 15, "total_sent": 75000},
+          {"name": "Samuel Carter", "transaction_count": 10, "total_sent": 50000},
+          {"name": "Linda Green", "transaction_count": 8, "total_sent": 32000}
+        ],
+        "top_receivers": [
+          {"name": "Robert Brown", "transaction_count": 12, "total_received": 60000},
+          {"name": "Alex Doe", "transaction_count": 10, "total_received": 45000},
+          {"name": "Jane Smith", "transaction_count": 8, "total_received": 35000}
+        ]
+      }
+    },
+    "user_profile": {
+      "description": "User profile with transaction summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer"},
+          "phone_number": {"type": "string"},
+          "full_name": {"type": "string"},
+          "account_number": {"type": "string"},
+          "is_active": {"type": "boolean"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "transaction_stats": {
+            "type": "object",
+            "properties": {
+              "total_sent": {"type": "number"},
+              "total_received": {"type": "number"},
+              "transaction_count": {"type": "integer"},
+              "average_amount": {"type": "number"},
+              "last_transaction": {"type": "string", "format": "date-time"}
+            }
+          },
+          "recent_transactions": {
+            "type": "array",
+            "items": {"$ref": "#/transaction/schema"}
+          }
+        }
+      },
+      "example": {
+        "id": 1,
+        "phone_number": "+250788110381",
+        "full_name": "Account Owner",
+        "account_number": "36521838",
+        "is_active": true,
+        "created_at": "2024-01-15T09:00:00",
+        "transaction_stats": {
+          "total_sent": 125000,
+          "total_received": 185000,
+          "transaction_count": 45,
+          "average_amount": 6888.89,
+          "last_transaction": "2024-05-27T18:40:46"
+        },
+        "recent_transactions": [
+          {
+            "id": 1693,
+            "transaction_id": "14121530824",
+            "amount": 2000,
+            "transaction_type": "airtime",
+            "date": "2024-05-27T18:40:46",
+            "balance_after": 150
+          },
+          {
+            "id": 1692,
+            "transaction_id": "97391079490",
+            "amount": 1700,
+            "transaction_type": "sent",
+            "date": "2024-05-27T08:01:47",
+            "balance_after": 3750
+          }
+        ]
+      }
+    },
+    "api_response": {
+      "description": "Standard API response format",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "success": {"type": "boolean", "const": true},
+              "data": {"type": "object"},
+              "message": {"type": "string"},
+              "timestamp": {"type": "string", "format": "date-time"}
+            },
+            "required": ["success", "data", "timestamp"]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "success": {"type": "boolean", "const": false},
+              "error": {"type": "string"},
+              "details": {"type": "string"},
+              "timestamp": {"type": "string", "format": "date-time"}
+            },
+            "required": ["success", "error", "timestamp"]
+          }
+        ]
+      },
+      "examples": {
+        "success": {
+          "success": true,
+          "data": {
+            "transaction": {"$ref": "#/transaction/example"}
+          },
+          "message": "Transaction retrieved successfully",
+          "timestamp": "2024-01-20T14:30:00Z"
+        },
+        "error": {
+          "success": false,
+          "error": "Transaction not found",
+          "details": "No transaction found with ID 9999",
+          "timestamp": "2024-01-20T14:30:00Z"
+        }
+      }
+    },
+    "pagination": {
+      "description": "Pagination metadata",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "page": {"type": "integer", "minimum": 1},
+          "size": {"type": "integer", "minimum": 1, "maximum": 100},
+          "total": {"type": "integer", "minimum": 0},
+          "pages": {"type": "integer", "minimum": 0},
+          "has_next": {"type": "boolean"},
+          "has_previous": {"type": "boolean"}
+        },
+        "required": ["page", "size", "total", "pages"]
+      },
+      "example": {
+        "page": 1,
+        "size": 20,
+        "total": 1693,
+        "pages": 85,
+        "has_next": true,
+        "has_previous": false
+      }
+    }
   },
-  "transactions": {
-    "transaction_id": 101,
-    "transaction_ref": "TX20260127001",
-    "sender": {"user_id": 1, "full_name": "Samuel Carter"},
-    "receiver": {"user_id": 2, "full_name": "Linda Deslem"},
-    "category": {"category_id": 1, "category_name": "Send Money"},
-    "amount": 50000.00,
-    "fee": 500.00,
-    "total_amount": 50500.00,
-    "currency": "RWF",
-    "transaction_date": "2026-01-27T14:00:00",
-    "status": "COMPLETED",
-    "sms_content": "You sent 50,000 RWF to 0788110383. Fee 500 RWF.",
-    "source_system": "MTN Mobile Money"
+  "sql_to_json_mapping": {
+    "tables": {
+      "sms_records": {
+        "id": "id",
+        "transaction_id": "transaction_id",
+        "amount": "amount",
+        "transaction_type": "transaction_type",
+        "sender_name": "sender.name",
+        "receiver_name": "receiver.name",
+        "transaction_date": "date",
+        "balance_after": "balance_after",
+        "fee": "fee",
+        "body": "sms_body"
+      },
+      "users": {
+        "id": "user.id",
+        "phone_number": "user.phone_number",
+        "full_name": "user.full_name",
+        "account_number": "user.account_number"
+      },
+      "transaction_categories": {
+        "name": "categories[]",
+        "code": "categories[]"
+      }
+    },
+    "relationships": {
+      "one_to_one": ["sms_records.sender_id -> users.id", "sms_records.receiver_id -> users.id"],
+      "one_to_many": ["users.id -> sms_records.sender_id", "users.id -> sms_records.receiver_id"],
+      "many_to_many": ["sms_records.id -> sms_category_association -> transaction_categories.id"]
+    }
   }
 }
