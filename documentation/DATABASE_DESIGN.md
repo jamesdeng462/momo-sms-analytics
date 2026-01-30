@@ -37,3 +37,34 @@ This document outlines the comprehensive database design for the MoMo SMS Analyt
 
 ### 3.1 Overview
 The ERD comprises 6 core entities with well-defined relationships:
+
+
+
+┌─────────────────┐ ┌──────────────────┐ ┌─────────────────────┐
+│ USERS       │◄────┤SMS_RECORDS ├─────► │TRANSACTION_CATEGORIES│
+├─────────────────┤ ├──────────────────┤ ├─────────────────────┤
+│ PK: id          │ │ PK: id           │ │ PK: id              │
+│ phone_number    │ │ transaction_type │ │ name                │
+│ full_name       │ │ amount           │ │ code                │
+│ account_number  │ │ sender_id (FK)   │ │ description         │
+│ is_active       │ │ receiver_id (FK) │ └─────────────────────┘
+│ created_at      │ │ transaction_date │ │
+│ updated_at      │ │ balance_after    │ │
+└─────────────────┘ │ fee              │ │
+                  │ │ transaction_id   │ │
+                  │ │ is_parsed        │ │
+▼                   └──────────────────┘ ▼
+┌─────────────────┐ │                      ┌─────────────────────┐
+│ OTP_RECORDS     │ │                      │  SMS_CATEGORY_ASSOC │
+├─────────────────┤ │                      ├─────────────────────┤
+│ PK: id          │ ▼                      │ PK: sms_id, cat_id  │
+│ otp_code        │   ┌──────────────────┐ │ assigned_at         │
+│ phone_number    │   │ SYSTEM_LOGS      │ └─────────────────────┘
+│ is_used         │   ├──────────────────┤
+│ expires_at      │   │ PK: id           │
+│ created_at      │   │ level            │
+└─────────────────┘   │ module           │
+                      │ message          │
+                      │ user_id (FK)     │
+                      │ created_at       │
+                      └──────────────────┘
