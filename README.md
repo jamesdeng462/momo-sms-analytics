@@ -1,6 +1,5 @@
 # momo-sms-analytics
 
-
 # Team eight
 
 # MoMo SMS Database Project
@@ -46,9 +45,6 @@ ETL, data storage, API services, and frontend components.
 - **James Giir Deng** (Team Lead & Backend Developer)
 - **Byusa M Martin De Poles** (Frontend Developer & Database Architect)
 
-## Project Overview
-A comprehensive Mobile Money (MoMo) SMS data processing system that extracts, transforms, and loads transaction data from SMS backups into a structured database for analytics and reporting.
-
 ## Key Features
 - **ETL Pipeline**: Parse raw XML SMS data into structured format
 - **Database Management**: MySQL/SQLite with full ACID compliance
@@ -65,3 +61,52 @@ A comprehensive Mobile Money (MoMo) SMS data processing system that extracts, tr
 - **Documentation**: Markdown, OpenAPI
 
 ## Repository Structure
+
+
+momo-sms-analytics/
+├── api/                          # FastAPI backend (updated from your existing)
+│   ├── __init__.py
+│   ├── main.py                   # FastAPI app with endpoints
+│   ├── models.py                 # SQLAlchemy models
+│   ├── database.py               # Database connection
+│   ├── crud.py                   # CRUD operations
+│   ├── schemas.py                # Pydantic schemas
+│   ├── parse_xml.py              # XML parsing
+│   ├── auth.py                   # Authentication
+│   └── api_handler.py            # HTTP server (from your code)
+├── data/                         # Data files
+│   ├── sms_data.xml              # Full XML data
+│   └── parsed_transactions.json  # Parsed JSON data
+├── documentation/                # Documentation
+│   ├── DATABASE_DESIGN.md
+│   ├── API_DOCUMENTATION.md
+│   └── SYSTEM_DESIGN.md
+├── examples/                     # Examples
+│   ├── json_schemas.json
+│   └── sample_requests.py
+├── images/                       # Images and diagrams
+│   ├── erd.png
+│   ├── miro_structure.png
+│   └── api_screenshot.png
+├── screenshots/                  # Operation screenshots
+│   ├── crud_operations/
+│   └── database_schema/
+├── sql/                          # SQL files
+│   ├── database_setup.sql
+│   ├── sample_queries.sql
+│   └── constraints.sql
+├── dsa/                          # Data Structures folder
+│   └── transactions.json         # For linear/dictionary search
+├── frontend/                     # Frontend dashboard
+│   ├── index.html
+│   ├── styles.css
+│   ├── script.js
+│   └── dashboard.js
+├── tests/                        # Test files
+│   ├── test_api.py
+│   ├── test_parsing.py
+│   └── test_database.py
+├── .env.example                  # Environment variables
+├── requirements.txt              # Python dependencies
+├── README.md                     # Main documentation
+└── docker-compose.yml            # Docker setup
