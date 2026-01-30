@@ -2,7 +2,3 @@
 <sms protocol="0" address="M-Money" date="1736868583669" type="1" subject="null" body="*164*S*Y'ello,A transaction of 10000 RWF by Data Bundle MTN on your MOMO account was successfully completed at 2025-01-14 17:29:36. Message from debit receiver: . Your new balance:88000 RWF. Fee was 0 RWF. Financial Transaction Id: 18087757600. External Transaction Id: 17368685383021954.*EN#" toa="null" sc_toa="null" service_center="+250788110383" read="1" status="-1" locked="0" date_sent="1736868576000" sub_id="6" readable_date="14 Jan 2025 5:29:43 PM" contact_name="(Unknown)" />
 <sms protocol="0" address="M-Money" date="1736878131643" type="1" subject="null" body="TxId: 30801532894. Your payment of 1,000 RWF to Deslem 61758 has been completed at 2025-01-14 20:08:44. Your new balance: 87,000 RWF. Fee was 0 RWF." toa="null" sc_toa="null" service_center="+250788110383" read="1" status="-1" locked="0" date_sent="1736878124000" sub_id="6" readable_date="14 Jan 2025 8:08:51 PM" contact_name="(Unknown)" />
 </sms>
-
-
-
-
