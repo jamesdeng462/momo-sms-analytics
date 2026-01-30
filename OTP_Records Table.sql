@@ -1,0 +1,9 @@
+CREATE TABLE otp_records (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    otp_code VARCHAR(10) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    purpose VARCHAR(50),
+    is_used BOOLEAN DEFAULT FALSE,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
