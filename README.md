@@ -110,3 +110,153 @@ momo-sms-analytics/
 ├── requirements.txt              # Python dependencies
 ├── README.md                     # Main documentation
 └── docker-compose.yml            # Docker setup
+
+
+
+# Docker Deployment
+bash
+Copy
+Download
+
+# Build and run with Docker
+docker-compose up -d
+
+# View logs
+
+docker-compose logs -f
+API Documentation
+Base URL: http://localhost:8000
+Key Endpoints
+Method	Endpoint	Description	Authentication
+GET	/api/transactions	List all transactions	Basic Auth
+GET	/api/transactions/{id}	Get specific transaction	Basic Auth
+POST	/api/transactions	Create new transaction	Basic Auth
+PUT	/api/transactions/{id}	Update transaction	Basic Auth
+DELETE	/api/transactions/{id}	Delete transaction	Basic Auth
+GET	/api/dashboard/stats	Dashboard statistics	Basic Auth
+POST	/api/parse/xml	Parse XML file	Basic Auth
+
+# Authentication
+Username: team5
+Password: ALU2025
+Method: Basic Authentication
+
+Usage Examples
+Parse XML Data
+python
+Copy
+Download
+
+import requests
+import base64
+
+# Authentication
+auth = base64.b64encode(b"team5:ALU2025").decode('utf-8')
+headers = {"Authorization": f"Basic {auth}"}
+
+# Parse XML
+response = requests.post(
+    "http://localhost:8000/api/parse/xml",
+    headers=headers,
+    files={"file": open("data/sms_data.xml", "rb")}
+)
+Query Transactions
+bash
+Copy
+Download
+
+# Using curl
+curl -u "team5:ALU2025" http://localhost:8000/api/transactions
+
+# Using Python
+import requests
+from requests.auth import HTTPBasicAuth
+
+response = requests.get(
+    "http://localhost:8000/api/transactions",
+    auth=HTTPBasicAuth('team5', 'ALU2025')
+)
+
+# Dashboard Features
+Transaction History: View all MoMo transactions
+Analytics Charts: Visualize spending patterns
+Category Breakdown: Analyze by transaction type
+Search & Filter: Find specific transactions
+Export Data: Download reports in JSON/CSV
+Project Management
+
+# Scrum Board
+https://github.com/jamesdeng462/momo-sms-analytics/projects
+
+# Task Sheet
+https://docs.google.com/spreadsheets/d/1THFdLiZaV6xgZWTia84oIPlt42OrRqCsz-0TQMUID2U/
+
+# Miro Board
+https://miro.com/app/board/uXjVGODnhYI=/
+
+# ERD Reference
+https://drive.google.com/file/d/1h7vQbIIBTC_RX2CrcEjB_6oaFeiDz5Wz/view
+
+# Development Guidelines
+
+# Branch Strategy
+main: Production-ready code
+develop: Integration branch
+feature: New features
+bugfix: Bug fixes
+hotfix: Critical fixes
+
+# Commit Convention
+feat: New feature
+fix: Bug fix
+docs: Documentation
+style: Formatting
+refactor: Code restructuring
+test: Testing
+chore: Maintenance
+
+Testing
+bash
+Copy
+Download
+
+# Run all tests
+python -m pytest tests/
+
+# Run specific test module
+python -m pytest tests/test_api.py
+
+# Run with coverage
+python -m pytest --cov=api tests/
+Security Considerations
+Data Encryption: Sensitive data encrypted at rest
+Access Control: Role-based permissions
+Input Validation: Sanitize all user inputs
+SQL Injection: Parameterized queries only
+Logging: Comprehensive audit trails
+Error Handling: Graceful failure without data exposure
+
+# Performance Optimization
+Database Indexing: Strategic indexes on frequently queried columns
+Query Optimization: Optimized JOIN operations
+Caching: Redis cache for frequent queries
+Pagination: Limit data transfer for large datasets
+Compression: Gzip compression for API responses
+
+# Contributing
+Fork the repository
+Create a feature branch (git checkout -b feature/AmazingFeature)
+Commit changes (git commit -m 'Add AmazingFeature')
+Push to branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+
+
+# Acknowledgments
+ALU: African Leadership University for academic guidance
+MTN Rwanda: For sample MoMo SMS data patterns
+Open Source Community: For invaluable tools and libraries
+
+# Contact
+James Giir Deng: james.deng@alustudent.com
+Byusa M Martin De Poles: m.byusa@alustudent.com
+
