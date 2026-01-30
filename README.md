@@ -3,11 +3,6 @@
 
 # Team eight
 
-# Team Members
--James Giir Deng 
--Byusa M Martin De Poles
-
-
 # MoMo SMS Database Project
 
 ## Overview
@@ -51,3 +46,28 @@ ETL, data storage, API services, and frontend components.
 -James Giir Deng
 -Byusa M Martin De Poles
 
+# MoMo SMS Analytics System
+
+## Team Eight Members
+- **James Giir Deng** (Team Lead & Backend Developer)
+- **Byusa M Martin De Poles** (Frontend Developer & Database Architect)
+
+## Project Overview
+A comprehensive Mobile Money (MoMo) SMS data processing system that extracts, transforms, and loads transaction data from SMS backups into a structured database for analytics and reporting.
+
+## Key Features
+- **ETL Pipeline**: Parse raw XML SMS data into structured format
+- **Database Management**: MySQL/SQLite with full ACID compliance
+- **RESTful API**: FastAPI backend with authentication
+- **Dashboard**: Interactive web dashboard for analytics
+- **Security**: Role-based access control and data encryption
+- **Scalability**: Modular design for enterprise deployment
+
+## Technology Stack
+- **Backend**: Python, FastAPI, SQLAlchemy
+- **Database**: MySQL/SQLite
+- **Frontend**: HTML5, CSS3, JavaScript, Chart.js
+- **DevOps**: Docker, GitHub Actions
+- **Documentation**: Markdown, OpenAPI
+
+## Repository Structure
