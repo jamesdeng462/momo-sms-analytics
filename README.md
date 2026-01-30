@@ -42,12 +42,6 @@ GitHub project tracker:  https://github.com/jamesdeng462/momo-sms-analytics/proj
 The project follows a modular, enterprise-style architecture separating
 ETL, data storage, API services, and frontend components.
 
- Owners:
--James Giir Deng
--Byusa M Martin De Poles
-
-# MoMo SMS Analytics System
-
 ## Team Eight Members
 - **James Giir Deng** (Team Lead & Backend Developer)
 - **Byusa M Martin De Poles** (Frontend Developer & Database Architect)
